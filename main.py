@@ -3,10 +3,12 @@ from data_access.local_store import LocalStoreDataAccess  # Import your data acc
 
 app = FastAPI()
 
-# Initialize the data access module based on the environment
-data_access = LocalStoreDataAccess('data')  # Use FileSystemDataAccess for local development
+# Initialize the data access module 
+# Use LocalStoreDataAccess by default for local development
+# TODO: use environment to select store
+data_access = LocalStoreDataAccess('local_store')  
 
-# Define FastAPI routes and handlers
+# Define routes and handlers
 @app.get("/")
 async def read_root():
     return {"message": "Welcome to the Dealership API"}
