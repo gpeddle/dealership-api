@@ -1,0 +1,5 @@
+{
+  "workdays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "workdayStartTime": "08:00 AM",
+  "workdayEndTime": "05:00 PM"
+}

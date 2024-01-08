@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Service Bay 1",
+    "equipment": ["Lift", "Diagnostic Tools", "Tire Changer"]
+  },
+  {
+    "id": 2,
+    "name": "Service Bay 2",
+    "equipment": ["Lift", "Alignment Machine", "Oil Change Tools"]
+  },
+  {
+    "id": 3,
+    "name": "Service Bay 3",
+    "equipment": ["Diagnostic Tools", "Tire Balancer", "Brake Service Tools"]
+  }
+]
