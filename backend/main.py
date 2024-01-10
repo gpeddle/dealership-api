@@ -1,6 +1,6 @@
 import os
 from fastapi import FastAPI
-from data_access.local_store import LocalStoreDataAccess  # Import your data access module
+from data_access.local_store import LocalStoreDataAccess  
 
 app = FastAPI()
 
@@ -12,6 +12,8 @@ if data_store_type == "local":
     data_access = LocalStoreDataAccess('local_store')
 elif data_store_type == "aws":
     raise NotImplementedError("AWS data store not implemented yet")
+
+# TODO: Add Auth
 
 # Define routes and handlers
 @app.get("/")
