@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "dealership-api"
+name = "dealership-config-backend
 version = "0.1.0"
-description = ""
+description = "Backend for dealership config app"
 authors = ["gpeddle <gpeddle@gmail.com>"]
 readme = "README.md"
 
