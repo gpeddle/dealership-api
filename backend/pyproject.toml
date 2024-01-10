@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "dealership-config-backend
+name = "dealership-config-backend"
 version = "0.1.0"
 description = "Backend for dealership config app"
 authors = ["gpeddle <gpeddle@gmail.com>"]
