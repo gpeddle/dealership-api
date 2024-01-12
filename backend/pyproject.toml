@@ -12,6 +12,9 @@ uvicorn = "^0.25.0"
 pydantic = "^2.5.3"
 
 
+[tool.poetry.group.dev.dependencies]
+pydantic-to-typescript = "^1.0.10"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

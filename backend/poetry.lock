@@ -234,6 +234,23 @@ files = [
 typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 
 [[package]]
+name = "pydantic-to-typescript"
+version = "1.0.10"
+description = "Convert pydantic models to typescript interfaces"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pydantic-to-typescript-1.0.10.tar.gz", hash = "sha256:c0d030f213b9b225381fc59a5ad7544a0e20bfb6856323f324fd3cf73e4fd447"},
+    {file = "pydantic_to_typescript-1.0.10-py3-none-any.whl", hash = "sha256:b2b3954fd4aa55f367aa0513ee3c21cd327221936c0cfbeb8d46b51542eceea7"},
+]
+
+[package.dependencies]
+pydantic = "*"
+
+[package.extras]
+dev = ["coverage", "pytest", "pytest-cov"]
+
+[[package]]
 name = "sniffio"
 version = "1.3.0"
 description = "Sniff out which async library your code is running under"
@@ -293,4 +310,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "6cec026f8c42ee3428ccb2186208b29caa3dc879fc4b214bdff2fefe2580f089"
+content-hash = "41ba742d6647b355602f95a7ce0ed1615fd013705da805127418e694f9de7ecd"
