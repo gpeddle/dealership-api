@@ -1,6 +1,6 @@
 import os
 import json
-from models.automobile_brand import AutomobileBrand
+from backend.models.automobile_brand import AutomobileBrand
 
 
 class LocalStoreDataAccess:
