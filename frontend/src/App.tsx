@@ -1,15 +1,15 @@
 import React from 'react';
 import { Admin, Resource, ListGuesser } from 'react-admin';
 import jsonServerProvider from 'ra-data-json-server';
-// Example of importing the interface in a React component
-import { AutomobileBrandInterface, ServiceBayInterface, WorkingHoursInterface } from '../../shared/frontend';
+import ConfigList from './components/ConfigList';
+// TODO get api from config
+//const endpoint = getApiEndpoint();
 
-
-const dataProvider = jsonServerProvider('http://127.0.0.1:8000'); // Replace with your actual backend URL
+const dataProvider = jsonServerProvider('http://127.0.0.1:8000'); 
 
 const App: React.FC = () => (
   <Admin dataProvider={dataProvider}>
-    <Resource name="config" list={ListGuesser} />
+    <Resource name="config" list={ConfigList} />
 
     {/* Add more resources as needed */}
   </Admin>
