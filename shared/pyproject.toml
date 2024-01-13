@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "dealership-config-models"
+name = "dealership-config-shared"
 version = "0.1.0"
 description = ""
 authors = ["gpeddle <gpeddle@gmail.com>"]
