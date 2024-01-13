@@ -9,9 +9,8 @@ const dataProvider = jsonServerProvider('http://127.0.0.1:8000'); // Replace wit
 
 const App: React.FC = () => (
   <Admin dataProvider={dataProvider}>
-    <Resource name="config/automobile_brands" list={ListGuesser} />
-    <Resource name="config/service_bays" list={ListGuesser} />
-    <Resource name="config/working_hours" list={ListGuesser} />
+    <Resource name="config" list={ListGuesser} />
+
     {/* Add more resources as needed */}
   </Admin>
 );
