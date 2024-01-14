@@ -31,13 +31,13 @@ def convert_to_typescript(model_class):
     """Generates a TypeScript interface from a Pydantic model class."""
     type_hints = get_type_hints(model_class)
     fields = [f'{field}: {python_type_to_typescript(type_hint)};' for field, type_hint in type_hints.items()]
-    ts_interface = f'export interface {model_class.__name__}Interface {{\n  ' + '\n  '.join(fields) + '\n}\n'
+    ts_interface = f'export interface {model_class.__name__} {{\n  ' + '\n  '.join(fields) + '\n}\n'
     return ts_interface
 
 
 def write_ts_file(model_name, ts_interface, output_folder):
     """Writes the TypeScript interface to a file."""
-    with open(os.path.join(output_folder, f"{model_name}_interface.ts"), "w") as file:
+    with open(os.path.join(output_folder, f"{model_name}.ts"), "w") as file:
         file.write(ts_interface)
 
 
@@ -51,6 +51,13 @@ def main(source_folder, output_folder):
     # Ensure the output directory exists
     os.makedirs(output_folder, exist_ok=True)
 
+    # Remove all existing TypeScript files from the output directory
+    for file in os.listdir(output_folder):
+        if file.endswith(".ts"):
+            os.remove(os.path.join(output_folder, file))
+
+    interface_names = set()
+
     # Process each Python file in the source directory
     for file in os.listdir(source_folder):
         if file.endswith(".py") and file != "__init__.py":
@@ -61,14 +68,19 @@ def main(source_folder, output_folder):
             model_module = load_py_module(model_file_path, model_name)
 
             # Find all model classes in the module
-            for attribute_name in dir(model_module):
-                attribute = getattr(model_module, attribute_name)
+            for model_name in dir(model_module):
+                attribute = getattr(model_module, model_name)
                 if isinstance(attribute, type) and issubclass(attribute, BaseModel) and attribute is not BaseModel:
                     # Convert the model to TypeScript
                     ts_interface = convert_to_typescript(attribute)
-                    write_ts_file(attribute_name, ts_interface, output_folder)
-                    print(f"Converted {
-                          attribute_name} to TypeScript interface.")
+                    write_ts_file(model_name, ts_interface, output_folder)
+                    interface_names.add(model_name)
+                    print(f"Converted {model_name} to TypeScript interface.")
+
+    # Create index.ts file
+    with open(os.path.join(output_folder, "index.ts"), "a") as index_file:
+        for model_name in interface_names:
+            index_file.write(f"export * from './{model_name}';\n")
 
 
 if __name__ == "__main__":
