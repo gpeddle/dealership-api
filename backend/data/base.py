@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class DataAccessInterface(ABC):
+class AbstractDataStore(ABC):
 
     @abstractmethod
     def read_config(self, config_name):
@@ -16,3 +16,5 @@ class DataAccessInterface(ABC):
     def list_configs(self):
         """List available configuration files."""
         pass
+
+

@@ -1,13 +1,15 @@
-import { Datagrid, List, TextField } from 'react-admin';
+import { Datagrid, List, TextField, DateField } from 'react-admin';
 
 const ConfigList = () => (
     <List>
-        <Datagrid rowClick="edit">
-            <TextField source="id" />
+        <Datagrid bulkActionButtons={false}>
             <TextField source="name" />
+            <TextField source="filename" />
+            <TextField source="version" />
+            <DateField source="updated" showTime={true}/>
+            
         </Datagrid>
     </List>
 );
-
 
 export default ConfigList;

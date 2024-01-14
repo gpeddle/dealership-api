@@ -1,8 +1,9 @@
 # This is a stub for the AWS-based data store.
 # Implement boto3 to connect to AWS services (e.g., DynamoDB, S3, RDS) for data.
-from data_access.data_access_base import DataAccessInterface
 
-class AWSDataAccess(DataAccessInterface):
+from .base import AbstractDataStore
+
+class AWSDataStore(AbstractDataStore):
     def __init__(self):
         # Initialize AWS client or connection here
         pass

@@ -1,8 +1,10 @@
 import os
+from datetime import datetime
 
 from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
-from data_access.local_store import LocalStoreDataAccess  
+
+from backend.data.local import LocalDataStore
 
 app = FastAPI()
 
@@ -25,7 +27,7 @@ app.add_middleware(
 data_store_type = os.environ.get("DATA_STORE_TYPE", "local")
 
 if data_store_type == "local":
-    data_access = LocalStoreDataAccess('local_store')
+    data_store = LocalDataStore('local_store')
 elif data_store_type == "aws":
     raise NotImplementedError("AWS data store not implemented yet")
 
@@ -38,7 +40,7 @@ async def read_root():
 
 @app.get("/config/{config_name}")
 async def read_config(config_name: str):
-    config_data = data_access.read_config(config_name)
+    config_data = data_store.read_config(config_name)
     if config_data:
         return config_data
     else:
@@ -47,7 +49,7 @@ async def read_config(config_name: str):
 @app.put("/config/{config_name}")
 async def update_config(config_name: str, data: dict):
     # TODO validate the config data
-    data_access.write_config(config_name, data)
+    data_store.write_config(config_name, data)
     return Response(status_code=204)
 
 @app.post("/config/{config_name}")
@@ -60,11 +62,9 @@ async def create_config(config_name: str, data: dict):
 
 @app.get("/config")
 async def list_configs(response: Response):
-    config_list = data_access.list_configs()
-    # TODO create an array of objects with id and name
+    config_list = data_store.list_configs()
     data = []
-    for config_name in config_list:
-        data.append({"id": config_name, "name": config_name})
-    # response.set('Access-Control-Expose-Headers', 'X-Total-Count')
+    for config_descriptor in config_list:
+        data.append(config_descriptor)
     response.headers['X-Total-Count'] = str(len(config_list)) 
     return data
