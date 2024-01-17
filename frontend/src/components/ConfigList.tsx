@@ -2,7 +2,7 @@ import { Datagrid, List, TextField, DateField } from 'react-admin';
 
 const ConfigList = () => (
     <List>
-        <Datagrid bulkActionButtons={false}>
+        <Datagrid bulkActionButtons={false}  rowClick="edit">
             <TextField source="name" />
             <TextField source="filename" />
             <TextField source="version" />
