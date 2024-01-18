@@ -9,8 +9,8 @@ class LocalDataStore(AbstractDataStore):
         super().__init__()
         self.data_directory = data_directory  # local path to JSON files
 
-    def read_config(self, config_name):
-        file_path = f"{self.data_directory}/{config_name}.json"
+    def read_config(self, config_filename):
+        file_path = f"{self.data_directory}/{config_filename}"
         try:
             with open(file_path, "r") as file:
                 return json.load(file)
@@ -32,17 +32,14 @@ class LocalDataStore(AbstractDataStore):
         # verify that all files in index.json exist
         config_files = []
         for cfg in index_data:
-            cfg_path = f"{self.data_directory}/{cfg['filename']}"
+            cfg_path = f"{self.data_directory}/{cfg['id']}"
             if os.path.isfile(cfg_path):
-                version = 'local'
-                timestamp = os.path.getmtime(cfg_path)
                 descriptor = ConfigFileDescriptor( 
                     cfg['id'],
                     cfg['name'], 
-                    cfg['filename'],
                     cfg['path'],
                     cfg['description'],
-                    version,
+                    cfg['version'],
                     cfg['created'],
                     cfg['updated'])
                 config_files.append(descriptor)

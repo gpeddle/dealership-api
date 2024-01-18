@@ -1,0 +1,36 @@
+import React from 'react';
+import { Edit, SimpleForm, TextInput, useNotify, useRedirect, SaveButton, EditProps } from 'react-admin';
+import { useForm } from 'react-final-form';
+
+interface ConfigEditProps extends EditProps {
+    dataProvider: any; // Replace 'any' with the specific type of your dataProvider
+}
+
+const ConfigEdit: React.FC<ConfigEditProps> = (props) => {
+    const notify = useNotify();
+    const redirect = useRedirect();
+    const form = useForm();
+
+    // Override the default save function
+    const save = async (values: any, redirect: any) => { // Replace 'any' with specific types
+        try {
+            await props.dataProvider.update('config', { id: props.id, data: values });
+            notify('Configuration updated');
+            redirect('list', props.basePath);
+            form.restart(); // Reset the form after successful submission
+        } catch (error) {
+            notify(`Error: ${error.message}`, 'warning');
+        }
+    };
+
+    return (
+        <Edit {...props} title={`Edit ${props.id}`} save={save}>
+            <SimpleForm>
+                <TextInput source="content" fullWidth multiline />
+                {/* Add other fields if needed */}
+            </SimpleForm>
+        </Edit>
+    );
+};
+
+export default ConfigEdit;

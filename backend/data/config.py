@@ -1,12 +1,11 @@
 class ConfigFileDescriptor:
     """A descriptor for configuration files."""
 
-    def __init__(self, id, name, filename, path, 
+    def __init__(self, id, name, path, 
                  description = None, version = 'undefined', 
                  created = None, updated = None):
         self.id = id
         self.name = name
-        self.filename = filename
         self.path = path
         self.description = description
         self.version = version

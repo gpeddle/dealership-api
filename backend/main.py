@@ -38,22 +38,22 @@ elif data_store_type == "aws":
 async def read_root():
     return {"message": "Welcome to the Dealership API"}
 
-@app.get("/config/{config_name}")
-async def read_config(config_name: str):
-    config_data = data_store.read_config(config_name)
+@app.get("/config/{filename}")
+async def read_config(filename: str):
+    config_data = data_store.read_config(filename)
     if config_data:
         return config_data
     else:
         return Response(status_code=404)
 
-@app.put("/config/{config_name}")
-async def update_config(config_name: str, data: dict):
+@app.put("/config/{filename}")
+async def update_config(filename: str, data: dict):
     # TODO validate the config data
-    data_store.write_config(config_name, data)
+    data_store.write_config(filename, data)
     return Response(status_code=204)
 
-@app.post("/config/{config_name}")
-async def create_config(config_name: str, data: dict):
+@app.post("/config/{filename}")
+async def create_config(filename: str, data: dict):
     # DO not allow creating a new config 
     # TODO handle this using http error instead of raising exception
     return Response(status_code=405)

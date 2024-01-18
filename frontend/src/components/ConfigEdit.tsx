@@ -5,7 +5,6 @@ export const ConfigEdit = () => (
         <SimpleForm>
             <TextInput source="id" />
             <TextInput source="name" />
-            <TextInput source="filename" />
             <TextInput source="path" />
             <TextInput source="description" />
             <TextInput source="version" />
